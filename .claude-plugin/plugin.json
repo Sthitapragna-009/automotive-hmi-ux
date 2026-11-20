@@ -1,0 +1,13 @@
+{
+  "name": "automotive-hmi-ux",
+  "version": "0.1.0",
+  "description": "Claude skill for designing in-vehicle interfaces drivers can use safely: glance budgets, lockouts, physical controls (Euro NCAP 2026), clusters, HUDs, voice and LLM assistants, ADAS and automation handover (UN R171/R157), EV, OTA and two-wheeler dashboards. Every rule is sourced and tagged.",
+  "author": {
+    "name": "KSP",
+    "url": "https://kspportfolio-one.vercel.app"
+  },
+  "homepage": "https://github.com/Sthitapragna-009/automotive-hmi-ux",
+  "repository": "https://github.com/Sthitapragna-009/automotive-hmi-ux",
+  "license": "MIT AND CC-BY-4.0",
+  "keywords": ["automotive", "hmi", "car", "infotainment", "adas", "hud", "ev", "motorcycle", "driver-distraction", "human-factors", "ux", "design"]
+}

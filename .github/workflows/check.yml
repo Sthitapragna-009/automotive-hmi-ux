@@ -1,0 +1,35 @@
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Every skill has a SKILL.md with name and description
+        run: |
+          status=0
+          for dir in skills/*/; do
+            f="${dir}SKILL.md"
+            if [ ! -f "$f" ]; then echo "Missing $f"; status=1; continue; fi
+            head -n 1 "$f" | grep -qx -- '---' || { echo "$f: no front matter"; status=1; }
+            grep -q '^name: ' "$f" || { echo "$f: no name"; status=1; }
+            grep -q '^description: ' "$f" || { echo "$f: no description"; status=1; }
+            len=$(grep -m1 '^description: ' "$f" | sed 's/^description: //' | wc -m)
+            # Claude skill descriptions are capped at 1024 characters (wc -m counts the newline).
+            [ "$len" -le 1025 ] || { echo "$f: description is $((len-1)) characters; the limit is 1024"; status=1; }
+          done
+          exit $status
+      - name: Every referenced file exists
+        run: |
+          status=0
+          for dir in skills/*/; do
+            for ref in $(grep -oh 'references/[A-Za-z0-9_/-]*\.md' "${dir}SKILL.md" | sort -u); do
+              [ -f "${dir}${ref}" ] || { echo "${dir}SKILL.md points to missing ${ref}"; status=1; }
+            done
+          done
+          exit $status

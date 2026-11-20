@@ -1,0 +1,16 @@
+{
+  "name": "automotive-hmi-ux",
+  "description": "Automotive HMI UX: a Claude skill for car, motorcycle and scooter interfaces drivers can use without crashing.",
+  "owner": {
+    "name": "KSP",
+    "url": "https://kspportfolio-one.vercel.app"
+  },
+  "plugins": [
+    {
+      "name": "automotive-hmi-ux",
+      "source": "./",
+      "description": "Sourced human-factors rules for clusters, infotainment, HUDs, ADAS handover, EV and two-wheeler dashboards.",
+      "version": "0.1.0"
+    }
+  ]
+}

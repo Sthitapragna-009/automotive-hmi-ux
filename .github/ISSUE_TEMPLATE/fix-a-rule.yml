@@ -1,0 +1,25 @@
+name: Fix a rule
+description: A rule is wrong, out of date, or the skill gave bad advice.
+title: "[Fix] "
+labels: ["correction"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where is it?
+      description: File and section, or paste the sentence.
+      placeholder: skills/automotive-hmi/references/automation-and-handover.md, "Takeover"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong?
+      description: Out of date, wrong market, misread source, or bad advice Claude gave while using the skill (paste the prompt if so).
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Correct source
+      description: A link that shows the right answer, if you have one.

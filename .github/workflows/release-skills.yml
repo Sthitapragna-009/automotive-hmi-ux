@@ -1,0 +1,45 @@
+# Packages the skill as a ready-to-upload zip and attaches it to a GitHub Release,
+# so designers can download it and upload it to Claude.ai without git or zipping.
+#
+# To publish: push a version tag (git tag v0.1.0 && git push origin v0.1.0),
+# or run this workflow by hand from the Actions tab and enter a tag.
+name: Release skill zips
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to create or update (e.g. v0.1.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build zips
+        run: |
+          mkdir -p dist
+          for dir in skills/*/; do
+            name=$(basename "$dir")
+            # One skill folder per zip, with SKILL.md directly inside it, as Claude.ai expects.
+            (cd skills && zip -rq "../dist/$name.zip" "$name")
+          done
+          ls -la dist
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.inputs.tag || github.ref_name }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" dist/*.zip --clobber
+          else
+            gh release create "$TAG" dist/*.zip --title "automotive-hmi-ux $TAG" --generate-notes
+          fi

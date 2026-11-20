@@ -1,0 +1,54 @@
+name: Suggest a rule
+description: Add a rule, study, regulation or car maker case that's missing.
+title: "[Rule] "
+labels: ["new rule"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Every rule here needs a source and a tag, so the more you can link, the faster it lands. A rough note is fine; you don't need to write the final wording.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area?
+      options:
+        - Glance budgets, lockouts, physical controls
+        - ADAS, automation, takeover
+        - Cluster, tell-tales, HUD, visual
+        - Voice and AI assistants, EV, OTA, companion apps
+        - Motorcycles and scooters
+        - Case study
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: rule
+    attributes:
+      label: The rule
+      description: What should a designer do or avoid, on which surface and in which driving state?
+      placeholder: "Show the last known speed limit when the camera can't read a sign, because…"
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: Link the regulation, rating protocol, platform guideline, study or company publication. Say if it's paywalled or you're going from memory.
+    validations:
+      required: true
+  - type: dropdown
+    id: tag
+    attributes:
+      label: Evidence type
+      options:
+        - "[REG] Law or regulation"
+        - "[STD] Standard, rating protocol or platform guideline"
+        - "[RES] Published research"
+        - "[PRAC] Documented company practice"
+        - "[INF] My own inference"
+        - Not sure
+  - type: input
+    id: market
+    attributes:
+      label: Market or date, if it applies
+      placeholder: "EU, Euro NCAP protocol from Jan 2026"

@@ -1,0 +1,145 @@
+<!doctype html>
+<!-- Source for assets/banner.png (README, rendered at 2x) and assets/social-preview.png
+     (GitHub social card, 1x). Canvas is 1280x640. Render with a headless browser screenshot,
+     allowing a few seconds for the web fonts to load. Same visual system as criticalUX,
+     with amber as the accent. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>automotive-hmi-ux banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Sora:wght@600;700&display=block" rel="stylesheet">
+<style>
+  :root {
+    --ink: #050409; --text: #F4F2FA; --muted: #A9A6B8;
+    --amber: #FFB938; --on-amber: #1A0F00;
+    --ui: Inter, "Segoe UI", system-ui, sans-serif;
+    --display: Sora, "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body { background: var(--ink); color: var(--text); font-family: var(--ui); position: relative; }
+
+  /* Light slats: lit vertical fins with a radial falloff and a fine hatch. */
+  .slats {
+    position: absolute; left: 470px; top: -60px; width: 1010px; height: 760px;
+    background: radial-gradient(ellipse 50% 62% at 50% 48%,
+      #FFFFFF 0%, #F1E8FF 20%, #C7A6FF 36%, #8F5CFF 52%, #4A30D0 67%, rgba(28,18,100,0) 82%);
+    -webkit-mask-image: repeating-linear-gradient(90deg, rgba(0,0,0,.04) 0px, rgba(0,0,0,1) 40px, rgba(0,0,0,.04) 56px);
+            mask-image: repeating-linear-gradient(90deg, rgba(0,0,0,.04) 0px, rgba(0,0,0,1) 40px, rgba(0,0,0,.04) 56px);
+  }
+  .hatch { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(5,4,9,.32) 0 1px, transparent 1px 4px); }
+  .fade { position: absolute; inset: 0; background:
+    linear-gradient(0deg, var(--ink) 0%, var(--ink) 12%, rgba(5,4,9,0) 24%),
+    linear-gradient(90deg, var(--ink) 0%, var(--ink) 40%, rgba(5,4,9,.6) 50%, rgba(5,4,9,0) 62%); }
+  .swoosh { position: absolute; inset: 0; }
+
+  /* Lockup */
+  .copy { position: absolute; left: 80px; top: 104px; width: 600px; }
+  .lockup { display: flex; align-items: center; gap: 16px; }
+  .mark { width: 64px; height: 38px; }
+  .word { font-family: var(--display); font-weight: 700; font-size: 30px; letter-spacing: -0.01em; }
+  .word b { color: var(--amber); font-weight: 700; }
+  h1 { font-family: var(--display); font-weight: 600; font-size: 54px; line-height: 1.08; letter-spacing: -0.03em; margin-top: 40px; }
+  h1 em { font-style: normal; color: var(--amber); white-space: nowrap; }
+  .sub { font-size: 20px; line-height: 1.5; color: var(--muted); margin-top: 22px; width: 540px; }
+  .meta { margin-top: 34px; font-size: 15px; color: var(--muted); }
+  .meta b { color: var(--text); font-weight: 500; }
+
+  /* Stacked card */
+  .stack { position: absolute; left: 748px; top: 100px; width: 452px; height: 392px; }
+  .slab, .rim, .card { position: absolute; left: 0; right: 0; border-radius: 46px; }
+  .slab { top: 30px; bottom: -30px; background: #000; }
+  .rim { top: 14px; bottom: -14px; background: linear-gradient(90deg, #D98A0B 0%, #FFB938 26%, #FFE7B0 50%, #FFB938 74%, #D98A0B 100%); }
+  .card { top: 0; bottom: 0; background: #000; padding: 16px; }
+  .panel { position: absolute; left: 16px; top: 16px; width: 420px; height: 196px; }
+  .count-wrap { position: absolute; right: 38px; top: 34px; text-align: right; color: var(--on-amber); }
+  .count { font-weight: 300; font-size: 64px; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .count-label { font-size: 12px; font-weight: 600; letter-spacing: .14em; margin-top: 8px; }
+  .mode { position: absolute; left: 34px; top: 152px; }
+  .mode-name { font-size: 20px; font-weight: 600; }
+  .mode-next { font-size: 15px; color: var(--amber); margin-top: 5px; }
+  .rows { position: absolute; left: 34px; right: 34px; top: 236px; display: flex; justify-content: space-between; font-size: 15px; }
+  .rows div span { display: block; color: var(--muted); font-size: 13px; margin-bottom: 3px; }
+  .steps { position: absolute; left: 34px; right: 34px; bottom: 34px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .step i { display: block; height: 8px; border-radius: 4px; border: 1px solid #7A7787; }
+  .step.on i { background: var(--amber); border-color: var(--amber); }
+  .step span { display: block; font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .step.on span { color: var(--text); }
+  .note { position: absolute; left: 748px; width: 452px; top: 556px; text-align: center; font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <div class="slats"><div class="hatch"></div></div>
+  <div class="fade"></div>
+
+  <svg class="swoosh" width="1280" height="640" viewBox="0 0 1280 640" aria-hidden="true">
+    <defs>
+      <linearGradient id="rimA" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#8B5CFF" stop-opacity="0"/>
+        <stop offset=".35" stop-color="#8B5CFF" stop-opacity=".9"/>
+        <stop offset=".62" stop-color="#FFFFFF"/>
+        <stop offset=".8" stop-color="#FFB938"/>
+        <stop offset="1" stop-color="#FFB938" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="M -40 660 C 260 560, 520 640, 760 520 S 1120 300, 1320 330" fill="none" stroke="url(#rimA)" stroke-width="1.5"/>
+  </svg>
+
+  <div class="copy">
+    <div class="lockup">
+      <svg class="mark" viewBox="0 0 64 38" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="61" height="35" rx="17.5" fill="none" stroke="#F4F2FA" stroke-width="3"/>
+        <circle cx="45" cy="19" r="11" fill="#FFB938"/>
+      </svg>
+      <div class="word">automotive-hmi-<b>ux</b></div>
+    </div>
+    <h1>HMI rules for screens people use at <em>110 km/h.</em></h1>
+    <p class="sub">A Claude skill with sourced rules for clusters, infotainment, HUDs, ADAS and two-wheelers.</p>
+    <p class="meta"><b>14</b> core rules &nbsp;·&nbsp; <b>Euro NCAP 2026</b> controls &nbsp;·&nbsp; <b>UN R171</b> handover</p>
+  </div>
+
+  <div class="stack" aria-label="Example takeover request">
+    <div class="slab"></div>
+    <div class="rim"></div>
+    <div class="card">
+      <svg class="panel" viewBox="0 0 420 196" aria-hidden="true">
+        <defs>
+          <linearGradient id="gloss" x1="0" y1="0" x2="1" y2="0.55">
+            <stop offset="0" stop-color="#E0900C"/>
+            <stop offset=".14" stop-color="#FFE3A3"/>
+            <stop offset=".28" stop-color="#FFB12E"/>
+            <stop offset=".5" stop-color="#FFC24F"/>
+            <stop offset=".75" stop-color="#F0A01E"/>
+            <stop offset="1" stop-color="#C97D06"/>
+          </linearGradient>
+          <clipPath id="notch">
+            <path d="M 30 0 H 390 A 30 30 0 0 1 420 30 V 166 A 30 30 0 0 1 390 196 H 318 C 290 196, 280 182, 266 168 C 252 154, 244 124, 214 124 H 30 A 30 30 0 0 1 0 94 V 30 A 30 30 0 0 1 30 0 Z"/>
+          </clipPath>
+        </defs>
+        <rect width="420" height="196" fill="url(#gloss)" clip-path="url(#notch)"/>
+      </svg>
+      <div class="count-wrap">
+        <div class="count">10 s</div>
+        <div class="count-label">TAKE OVER STEERING</div>
+      </div>
+      <div class="mode">
+        <div class="mode-name">Assist is ending</div>
+        <div class="mode-next">You drive in 10 seconds</div>
+      </div>
+      <div class="rows">
+        <div><span>Why</span>Lane markings lost</div>
+        <div><span>If no response</span>Slows to a stop</div>
+      </div>
+      <div class="steps" aria-label="Escalation">
+        <div class="step on"><i></i><span>See</span></div>
+        <div class="step on"><i></i><span>Hear</span></div>
+        <div class="step"><i></i><span>Feel</span></div>
+        <div class="step"><i></i><span>Stop</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="note">Say who's in control and what happens next. Never just a chime.</div>
+</body>
+</html>
